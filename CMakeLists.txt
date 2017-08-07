@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 2.8.3)
 project(opencv3_catkin)
 
 find_package(catkin_simple REQUIRED)
@@ -20,11 +20,6 @@ ExternalProject_Add(${CONTRIB_NAME}
   INSTALL_COMMAND ""
 )
 
-SET(ENV{CCACHE_DISABLE} 1)
-
-#[[export CC=/usr/local/bin/gcc
-export CXX=/usr/local/bin/g++
-]]
 SET(OPENCV_SRC_PATH "opencv3_src")
 ExternalProject_Add(opencv3_src
   DEPENDS ${CONTRIB_NAME}
@@ -35,7 +30,8 @@ ExternalProject_Add(opencv3_src
   BINARY_DIR opencv3_build
   PATCH_COMMAND patch -p0 < ${CMAKE_SOURCE_DIR}/fix_python_discovery.patch
   CONFIGURE_COMMAND cd ../${OPENCV_SRC_PATH} && cmake
-    -DCMAKE_CXX_COMPILER=/usr/bin/g++
+    -DCMAKE_CXX_COMPILER=/usr/bin/g++ # Note(alex.millane): This and the next line used to sidestep ccache when building.
+    -DCUDA_NVCC_HOST_COMPILER=/usr/bin/g++
     -DOPENCV_EXTRA_MODULES_PATH=../${CONTRIB_NAME}_src/modules .
     -DWITH_TBB=ON
     -DBUILD_opencv_python2=ON
@@ -55,10 +51,6 @@ ExternalProject_Add(opencv3_src
     -DBUILD_TESTS=OFF
     -DBUILD_opencv_ts=OFF
     -DBUILD_TESTS=OFF
-    -DENABLE_CCACHE=OFF
-    -DCUDA_NVCC_HOST_COMPILER=/usr/bin/g++
-    -DWITH_IPP=OFF
-    -DFORCE_INLINES=ON
     # opencv_contrib packages
     -DBUILD_opencv_dnn=OFF # Pulls in the system protobuf as a dependency!
     -DBUILD_opencv_dnns_easily_fooled=OFF
