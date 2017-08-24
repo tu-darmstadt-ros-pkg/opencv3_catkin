@@ -44,7 +44,7 @@ ExternalProject_Add(opencv3_src
     -DENABLE_PRECOMPILED_HEADERS=OFF
     -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX}
     -DBUILD_SHARED_LIBS=ON
-    -DWITH_CUDA=OFF
+    -DWITH_CUDA=ON
     -DWITH_OPENCL=OFF
     -DBUILD_TESTS=OFF
     -DBUILD_opencv_ts=OFF
@@ -74,7 +74,7 @@ ExternalProject_Add(opencv3_src
     -DBUILD_opencv_sfm=OFF
     -DBUILD_opencv_stereo=OFF
     -DBUILD_opencv_structured_light=OFF
-    -DBUILD_opencv_surface_matching=OFF
+    -DBUILD_opencv_surface_matching=ON
     -DBUILD_opencv_text=OFF
     -DBUILD_opencv_tracking=OFF
     -DBUILD_opencv_xfeatures2d=ON
