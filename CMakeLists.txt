@@ -3,7 +3,24 @@ project(opencv3_catkin)
 
 find_package(catkin_simple REQUIRED)
 
-catkin_simple()
+if(APPLE)
+ catkin_simple()
+ set(CMAKE_C_COMPILER clang-omp)
+ set(CMAKE_CXX_COMPILER clang-omp++)
+ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp")
+ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp")
+ else()
+ catkin_simple(ALL_DEPS_REQUIRED)
+ endif()
+
+ # OpenMP
+ # Adapted from http://wiki.ros.org/catkin/migrating_from_rosbuild
+ if(OPENMP_FOUND)
+ message(STATUS "OpenMP found! cxx_flags: ${OpenMP_CXX_FLAGS} libs: ${OpenMP_LIBS}")
+ set(OpenMP_FLAGS ${OpenMP_CXX_FLAGS})
+ set(OpenMP_LIBS gomp)
+ add_definitions(-Wno-unknown-pragmas ${OpenMP_FLAGS})
+ endif()
 
 include(ExternalProject)
 
@@ -32,6 +49,7 @@ ExternalProject_Add(opencv3_src
   CONFIGURE_COMMAND cd ../${OPENCV_SRC_PATH} && cmake
     -DOPENCV_EXTRA_MODULES_PATH=../${CONTRIB_NAME}_src/modules .
     -DWITH_TBB=ON
+    -DWITH_OpenMP=ON
     -DBUILD_opencv_python2=ON
     -DBUILD_opencv_python3=OFF
     -DWITH_V4L=ON

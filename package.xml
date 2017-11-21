@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>opencv3_catkin</name>
-  <version>0.0.1</version> 
+  <version>0.0.1</version>
   <description>opencv3_catkin</description>
   <maintainer email="paul.furgale@mavt.ethz.ch">Paul Furgale</maintainer>
   <author>Paul Furgale</author>
@@ -9,5 +9,6 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <buildtool_depend>catkin_simple</buildtool_depend>
+  <buildtool_depend>OpenMP</buildtool_depend>
 
 </package>
