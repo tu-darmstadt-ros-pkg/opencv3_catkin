@@ -11,8 +11,8 @@ file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 
 SET(CONTRIB_NAME "opencv3_contrib")
 ExternalProject_Add(${CONTRIB_NAME}
-  URL https://github.com/opencv/opencv_contrib/archive/3.2.0.zip
-  URL_MD5 423237bccd1c6e0a5edd812823fb4237
+  URL https://github.com/opencv/opencv_contrib/archive/3.4.0.zip
+  # URL_MD5 423237bccd1c6e0a5edd812823fb4237
   SOURCE_DIR ${CONTRIB_NAME}_src
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND ""
@@ -23,13 +23,13 @@ ExternalProject_Add(${CONTRIB_NAME}
 SET(OPENCV_SRC_PATH "opencv3_src")
 ExternalProject_Add(opencv3_src
   DEPENDS ${CONTRIB_NAME}
-  URL https://github.com/Itseez/opencv/archive/3.2.0.zip
-  URL_MD5 bfc6a261eb069b709bcfe7e363ef5899
+  URL https://github.com/opencv/opencv/archive/3.4.0.zip
+  # URL_MD5 bfc6a261eb069b709bcfe7e363ef5899
   UPDATE_COMMAND ""
   SOURCE_DIR ${OPENCV_SRC_PATH}
   BINARY_DIR opencv3_build
   PATCH_COMMAND patch -p0 < ${CMAKE_SOURCE_DIR}/fix_python_discovery.patch
-  CONFIGURE_COMMAND cd ../${OPENCV_SRC_PATH} && cmake
+  CONFIGURE_COMMAND cmake
     -DOPENCV_EXTRA_MODULES_PATH=../${CONTRIB_NAME}_src/modules .
     -DWITH_TBB=ON
     -DBUILD_opencv_python2=ON
@@ -81,9 +81,9 @@ ExternalProject_Add(opencv3_src
     -DBUILD_opencv_xfeatures2d=ON
     -DBUILD_opencv_ximgproc=OFF
     -DBUILD_opencv_xobjdetect=OFF
-    -DBUILD_opencv_xphoto=OFF .
-  BUILD_COMMAND cd ../${OPENCV_SRC_PATH} && make -j8
-  INSTALL_COMMAND cd ../${OPENCV_SRC_PATH} && make install -j8
+    -DBUILD_opencv_xphoto=OFF ../${OPENCV_SRC_PATH}
+  BUILD_COMMAND make -j8
+  INSTALL_COMMAND make install -j8
 )
 
 cs_add_library(${PROJECT_NAME} src/dependency_tracker.cc)
