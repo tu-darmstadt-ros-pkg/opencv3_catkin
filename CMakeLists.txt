@@ -12,7 +12,7 @@ file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 SET(CONTRIB_NAME "opencv3_contrib")
 ExternalProject_Add(${CONTRIB_NAME}
   URL https://github.com/opencv/opencv_contrib/archive/3.4.0.zip
-  # URL_MD5 423237bccd1c6e0a5edd812823fb4237
+  URL_MD5 92c09ce6c837329f05802a8d17136148
   SOURCE_DIR ${CONTRIB_NAME}_src
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND ""
@@ -24,7 +24,7 @@ SET(OPENCV_SRC_PATH "opencv3_src")
 ExternalProject_Add(opencv3_src
   DEPENDS ${CONTRIB_NAME}
   URL https://github.com/opencv/opencv/archive/3.4.0.zip
-  # URL_MD5 bfc6a261eb069b709bcfe7e363ef5899
+  URL_MD5 ed60f8bbe7a448f325d0a0f58fcf2063
   UPDATE_COMMAND ""
   SOURCE_DIR ${OPENCV_SRC_PATH}
   BINARY_DIR opencv3_build
