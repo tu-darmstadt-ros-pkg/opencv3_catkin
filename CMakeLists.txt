@@ -47,6 +47,8 @@ ExternalProject_Add(opencv3_src
     -DBUILD_SHARED_LIBS=ON
     -DCUDA_HOST_COMPILER=${CMAKE_CXX_COMPILER}
     -DWITH_CUDA=ON
+    # TODO(fabianbl): Check why IPP is not working.
+    -DWITH_IPP=OFF
     -DWITH_OPENCL=OFF
     -DBUILD_TESTS=OFF
     -DBUILD_opencv_ts=OFF
