@@ -47,6 +47,8 @@ ExternalProject_Add(opencv3_src
     -DBUILD_SHARED_LIBS=ON
     -DCUDA_HOST_COMPILER=${CMAKE_CXX_COMPILER}
     -DWITH_CUDA=ON
+    # TODO(fabianbl): Set right CUDA version automatically.
+    -DCUDA_ARCH_BIN=5.0
     # TODO(fabianbl): Check why IPP is not working.
     -DWITH_IPP=OFF
     -DWITH_OPENCL=OFF
