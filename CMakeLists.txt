@@ -87,20 +87,29 @@ ExternalProject_Add(opencv3_src
   INSTALL_COMMAND cd ../${OPENCV_BUILD_PATH} && make install -j8
 )
 
-cs_add_library(${PROJECT_NAME} src/dependency_tracker.cc)
-add_dependencies(${PROJECT_NAME} opencv3_src)
-# This can be removed once Ubuntu 14.04 is no longer supported.
-execute_process(COMMAND lsb_release -rs OUTPUT_VARIABLE UBUNTU_RELEASE)
-if("${UBUNTU_RELEASE}" STREQUAL "14.04")
-  target_link_libraries(${PROJECT_NAME}
-    ${CATKIN_DEVEL_PREFIX}/lib/x86_64-linux-gnu/libopencv_core${CMAKE_SHARED_LIBRARY_SUFFIX})
-else()
-  target_link_libraries(${PROJECT_NAME}
-    ${CATKIN_DEVEL_PREFIX}/lib/libopencv_core${CMAKE_SHARED_LIBRARY_SUFFIX})
-endif()
-
 cs_install()
 
-cs_export(
-  INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include
-CFG_EXTRAS opencv3-extras.cmake)
+cs_export(INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include
+          LIBRARIES opencv_aruco
+                    opencv_calib3d
+                    opencv_core
+                    opencv_features2d
+                    opencv_flann
+                    opencv_highgui
+                    opencv_imgcodecs
+                    opencv_imgproc
+                    opencv_ml
+                    opencv_objdetect
+                    opencv_phase_unwrapping
+                    opencv_photo
+                    opencv_rgbd
+                    opencv_saliency
+                    opencv_shape
+                    opencv_stitching
+                    opencv_superres
+                    opencv_video
+                    opencv_videoio
+                    opencv_videostab
+                    opencv_viz
+                    opencv_xfeatures2d
+)
