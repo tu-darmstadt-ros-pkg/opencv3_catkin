@@ -55,7 +55,7 @@ ExternalProject_Add(opencv3_src
     -DBUILD_opencv_dnn=OFF # Pulls in the system protobuf as a dependency!
     -DBUILD_opencv_dnns_easily_fooled=OFF
     -DBUILD_opencv_cnn_3dobj=OFF
-    -DBUILD_opencv_aruco=OFF
+    -DBUILD_opencv_aruco=ON
     -DBUILD_opencv_bgsegm=OFF
     -DBUILD_opencv_bioinspired=OFF
     -DBUILD_opencv_ccalib=OFF
@@ -119,7 +119,8 @@ foreach(installed_file ${OPENCV_INSTALLED_EXECUTABLES})
 endforeach()
 
 cs_export(INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include
-          LIBRARIES opencv_calib3d
+          LIBRARIES opencv_aruco
+                    opencv_calib3d
                     opencv_core
                     opencv_features2d
                     opencv_flann
