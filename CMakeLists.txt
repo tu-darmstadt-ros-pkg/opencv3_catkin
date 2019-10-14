@@ -55,6 +55,7 @@ ExternalProject_Add(opencv3_src
     -DBUILD_opencv_ts=OFF
     -DBUILD_TESTS=OFF
     # opencv_contrib packages
+    -DWITH_PROTOBUF=OFF
     -DBUILD_opencv_dnn=OFF # Pulls in the system protobuf as a dependency!
     -DBUILD_opencv_dnns_easily_fooled=OFF
     -DBUILD_opencv_cnn_3dobj=OFF
