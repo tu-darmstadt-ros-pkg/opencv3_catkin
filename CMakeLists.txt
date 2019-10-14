@@ -34,6 +34,8 @@ ExternalProject_Add(opencv3_src
   CONFIGURE_COMMAND cd ../${OPENCV_BUILD_PATH} && cmake
     -DOPENCV_EXTRA_MODULES_PATH=../${CONTRIB_NAME}_src/modules .
     -DWITH_TBB=ON
+    -DCMAKE_CXX_STANDARD=11
+    -DCMAKE_CXX_STANDARD_REQUIRED=ON
     -DBUILD_opencv_python2=ON
     -DBUILD_opencv_python3=ON
     -DWITH_GTK_2_X=ON  # Can't use GTK3 as it links against system protobuf.
