@@ -42,7 +42,7 @@ ExternalProject_Add(opencv3_src
     -DWITH_V4L=ON
     -DINSTALL_C_EXAMPLES=OFF
     -DINSTALL_PYTHON_EXAMPLES=OFF
-    -DBUILD_EXAMPLES=OFF
+    -DBUILD_EXAMPLES=ON
     -DWITH_QT=OFF # Needed by clang under Ubuntu 14.04 and GTK_WIDGET(cvGetWindowHandle(...)) with gcc (image_view)
     -DWITH_OPENGL=ON
     -DWITH_VTK=ON
@@ -50,7 +50,7 @@ ExternalProject_Add(opencv3_src
     -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX}
     -DBUILD_SHARED_LIBS=ON
     -DWITH_CUDA=OFF
-    -DWITH_OPENCL=OFF
+    -DWITH_OPENCL=ON
     -DBUILD_TESTS=OFF
     -DBUILD_opencv_ts=OFF
     -DBUILD_TESTS=OFF
@@ -62,7 +62,7 @@ ExternalProject_Add(opencv3_src
     -DBUILD_opencv_bgsegm=OFF
     -DBUILD_opencv_bioinspired=OFF
     -DBUILD_opencv_ccalib=OFF
-    -DBUILD_opencv_contrib_world=OFF
+    -DBUILD_opencv_contrib_world=ON
     -DBUILD_opencv_datasets=OFF
     -DBUILD_opencv_dpm=OFF
     -DBUILD_opencv_face=OFF
@@ -71,7 +71,7 @@ ExternalProject_Add(opencv3_src
     -DBUILD_opencv_hdf=OFF
     -DBUILD_opencv_line_descriptor=ON
     -DBUILD_opencv_matlab=OFF
-    -DBUILD_opencv_optflow=OFF
+    -DBUILD_opencv_optflow=ON
     -DBUILD_opencv_plot=OFF
     -DBUILD_opencv_reg=OFF
     -DBUILD_opencv_rgbd=ON
@@ -85,8 +85,8 @@ ExternalProject_Add(opencv3_src
     -DBUILD_opencv_xfeatures2d=ON
     -DBUILD_opencv_ximgproc=ON
     -DBUILD_opencv_xobjdetect=OFF
-    -DBUILD_opencv_nonfree=OFF
-    -DBUILD_opencv_xphoto=OFF ../${OPENCV_SRC_PATH}
+    -DBUILD_opencv_nonfree=ON
+    -DBUILD_opencv_xphoto=ON ../${OPENCV_SRC_PATH}
   BUILD_COMMAND cd ../${OPENCV_BUILD_PATH} && make -j8
   INSTALL_COMMAND cd ../${OPENCV_BUILD_PATH} && make install -j8
 )
@@ -134,6 +134,7 @@ cs_export(INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include
                     opencv_line_descriptor
                     opencv_ml
                     opencv_objdetect
+                    opencv_optflow
                     opencv_phase_unwrapping
                     opencv_photo
                     opencv_rgbd
